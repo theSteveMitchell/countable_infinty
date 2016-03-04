@@ -2,20 +2,27 @@
 
 Here I prove that the set of all natural numbers (denoted as "N") is equinumerous to the set of all real numbers between 0 and 1 (denoted as "(0,1)")
 
-Modern math knows that N is "countably infinite" and denoted as aleph-null, but the set of real numbers in the range (0,1) are "uncountably infinite" and are therefore much larger than the set N.  This was proved in 1874 by Georg Cantor.  I'll attempt to disprove his proof.
+Modern math knows that `N` is "countably infinite" and denoted as aleph-null, but the set of real numbers in the range (0,1) are "uncountably infinite" and are therefore much larger than the set `N`.  This was proved in 1874 by Georg Cantor.  I'll attempt to disprove his proof.
 
-There are basically three tests used to show that a set B is a subset of A.  Let's create the following sets
-- A {x| x in N}  (The set of all natural numbers)
-- B {x| x in R; x >= 0, x < 1}  (The set of all Real numbers between 0 and 1 (exclusive))
+Let's create the following set
+`B {x| x in R; x >= 0; x < 1}`  (The set of all Real numbers between 0 and 1 (exclusive))
 
-Natural numbers are positive integers (0,1,2,3,4,5,6...)
+Natural numbers are positive integers `(0,1,2,3,4,5,6...)`
 Real numbers between 0 and 1 means any decimal, terminating or non-terminating, between 0 and 1.
-This list includes 0.1, 0.5, 0.12354, 0.99999, and 0.2348972349823234123123123123123.
+This list includes `0.1, 0.5, 0.12354, 0.99999, and 0.2348972349823234123123123123123`.
 
 ## Corresponce test.
+We have a function `f`, that maps `N` to `B`
+`f(n) = b`, where if `n` is in `N`, then `b` is in `B`.
 
-Given this listing of B:
-x     | f(x)
+
+`f(x)` reverses the digits of `x`, and places a decimal to the left.
+`root_method.rb` solves this using strings in ruby.
+`equation_method.rb` attempts to use math operations (and mostly works)
+
+The listing of `B` starts as:
+```
+n     | f(n)
 ------+---------------
      0 | 0.0
      1 | 0.1
@@ -47,15 +54,18 @@ x     | f(x)
     92 | 0.29
     ...| ...
 713454 | 0.454317
+```
+For any number `n`, we can simply call `f(n)` to get the corresponding value of `b`
+There is no real number `b` that does not correspond to `f(n)` for some value of `n`
 
-f(x) reverses the digits of x, and adds a decimal
-I've not yet worked out how to express this in an equation...
+`.223049823409 = f(904328940322)`
+`.333333333... = f(3333333333333)`
 
 
 ## Diagonal Proof?
 
-Here is the Listing of f(975310824659753108246597531082465) through f(975310824659753108246597531082495):
-
+Here is the Listing of f(`975310824659753108246597531082465`) through f(`975310824659753108246597531082495`):
+```
 0.564280135795642801357956428013579
 0.664280135795642801357956428013579
 0.764280135795642801357956428013579
@@ -87,11 +97,12 @@ Here is the Listing of f(975310824659753108246597531082465) through f(9753108246
 0.394280135795642801357956428013579
 0.494280135795642801357956428013579
 0.594280135795642801357956428013579
-
+```
 
 Cantor created the Diagonal Proof to show that any listing of B cannot contain the number z
 
 z is found by taking some subset of the listing, and picking the nth digit of the nth item in the listing
+```
 0.|5|64280135795642801357956428013579
 0.6|6|4280135795642801357956428013579
 0.76|4|280135795642801357956428013579
@@ -125,22 +136,25 @@ z is found by taking some subset of the listing, and picking the nth digit of th
 0.594280135795642801357956428013|5|79
 0.6942801357956428013579564280135|7|9
 0.79428013579564280135795642801357|9|
+```
 
-This gives us 0.564280135795642801357956428013579
+This gives us `0.564280135795642801357956428013579`
 
 Then we simply increment each digit (9 increments to 0).
 
-This gives us 0.67539124680675391246806753912468 (trailing zero removed)
+This gives us `0.67539124680675391246806753912468` (trailing zero removed)
 
-Diagonal proof would assert that this number isn't in the listing of B.  Hoever by simply reversing its digists, we know that it Does exist in B, at index 86421935760864219357608642193576.
+Diagonal proof would assert that this number isn't in the listing of B.  Hoever by simply reversing its digists, we know that it Does exist in B, at index `86421935760864219357608642193576`.
 
-In other words, f(86421935760864219357608642193576) = 0.67539124680675391246806753912468
+In other words, `f(86421935760864219357608642193576) = 0.67539124680675391246806753912468`
 
 So, the diagonal proof fails in this case.
 
-So, we've established that the the list B (The set of all Real numbers between 0 and 1, exclusive) is in fact countable, and furthermore we have a correspondence between N and B.
+So, we've established that the the list B (The set of all Real numbers between 0 and 1, exclusive) is in fact countable, since we have a correspondence between `N` and `B`.
 
-The set B is the same size as N.
+Furthermore, we've proved that the Diagonal Proof cannot be used to find a number not in `B`.  So the Diagonal Proof itself fails.
+
+The set `B` is the same size as `N`.
 
 
 
